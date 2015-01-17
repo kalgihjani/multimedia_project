@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    
+function allsession(idpass){
+    
+    var x = document.getElementById(idpass).value;
+    $.post("multi",
+    {
+      name:x
+    },
+    function(data,status){
+        var buttons="<br>";
+        
+        var result=data;
+        var temp = new Array();
+        temp=result.split(' ');
+        for(var i=0;i<temp.length;i++)
+        {
+            buttons +="<input type=\"button\" id="+temp[i]+" value="+temp[i]+" onclick=\"allsession(id)\"><br><br>";
+        }
+        
+        var innerDiv = document.createElement('div');
+        innerDiv.id = idpass+"division";
+        
+        document.getElementsByTagName('body')[0].appendChild(innerDiv);
+        document.getElementById(idpass+"division").innerHTML=buttons;
+        
+        
+    }); 
+  }
+</script>
+</head>
+
+<body>
+    
+     <input type="button" id="abc" value="allsessions" onclick="allsession(id)">
+    
+    
+</body>
+
+</html>
